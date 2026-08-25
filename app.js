@@ -207,7 +207,7 @@ function App() {
   const [syncing, setSyncing] = useState(false);
   const saveTimer = useRef(null);
 
-  useEffect(() => {
+   useEffect(() => {
     const load = async () => {
       setSyncing(true);
       const saved = await loadFromSupabase();
@@ -215,6 +215,9 @@ function App() {
       setSyncing(false);
     };
     load();
+    // Refresh every 30 seconds to sync across devices
+    const interval = setInterval(load, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const saveData = (newData) => {
