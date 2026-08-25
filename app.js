@@ -7,25 +7,6 @@ const INITIAL_DATA = {
     emoji: "💊",
     sections: [
       {
-        title: "Completed",
-        tasks: [
-          { id: "am1", text: "Core app — drug search, condition pages, side effects", done: true },
-          { id: "am2", text: "Stripe live payments (Basic £4.99, Premium £9.99)", done: true },
-          { id: "am3", text: "Email confirmation flow", done: true },
-          { id: "am4", text: "Google OAuth (Continue with Google)", done: true },
-          { id: "am5", text: "DOB verification — 18+ enforced", done: true },
-          { id: "am6", text: "My Med History (Premium)", done: true },
-          { id: "am7", text: "Voice reading — ElevenLabs (Premium)", done: true },
-          { id: "am8", text: "AI Condition Agent (Premium)", done: true },
-          { id: "am9", text: "Admin dashboard (users, DOB, revenue)", done: true },
-          { id: "am10", text: "SEO pages, sitemap.xml, robots.txt", done: true },
-          { id: "am11", text: "Email branding — Resend (noreply@askmedily.com)", done: true },
-          { id: "am12", text: "Terms & Privacy pages", done: true },
-          { id: "am13", text: "Logo across all pages", done: true },
-          { id: "am14", text: "Webhook fixed — Stripe live mode confirmed working", done: true },
-        ]
-      },
-      {
         title: "To Do — In Order",
         tasks: [
           { id: "am15", text: "Set up Google Workspace (hello@askmedily.com)", done: false },
@@ -46,6 +27,25 @@ const INITIAL_DATA = {
           { id: "am30", text: "iOS/Android app", done: false },
           { id: "am31", text: "Tier 3 — pharmacist consultations", done: false },
         ]
+      },
+      {
+        title: "Completed",
+        tasks: [
+          { id: "am1", text: "Core app — drug search, condition pages, side effects", done: true },
+          { id: "am2", text: "Stripe live payments (Basic £4.99, Premium £9.99)", done: true },
+          { id: "am3", text: "Email confirmation flow", done: true },
+          { id: "am4", text: "Google OAuth (Continue with Google)", done: true },
+          { id: "am5", text: "DOB verification — 18+ enforced", done: true },
+          { id: "am6", text: "My Med History (Premium)", done: true },
+          { id: "am7", text: "Voice reading — ElevenLabs (Premium)", done: true },
+          { id: "am8", text: "AI Condition Agent (Premium)", done: true },
+          { id: "am9", text: "Admin dashboard (users, DOB, revenue)", done: true },
+          { id: "am10", text: "SEO pages, sitemap.xml, robots.txt", done: true },
+          { id: "am11", text: "Email branding — Resend (noreply@askmedily.com)", done: true },
+          { id: "am12", text: "Terms & Privacy pages", done: true },
+          { id: "am13", text: "Logo across all pages", done: true },
+          { id: "am14", text: "Webhook fixed — Stripe live mode confirmed working", done: true },
+        ]
       }
     ]
   },
@@ -55,14 +55,6 @@ const INITIAL_DATA = {
     emoji: "🎯",
     sections: [
       {
-        title: "Completed",
-        tasks: [
-          { id: "la1", text: "Channel created (@LifeAdjustments)", done: true },
-          { id: "la2", text: "Video 1 LIVE — youtu.be/LL36ackgpVs", done: true },
-          { id: "la3", text: "Scripts for first 5 videos written", done: true },
-        ]
-      },
-      {
         title: "To Do — In Order",
         tasks: [
           { id: "la4", text: "Record Short 1 — 50/30/20 Budget Rule", done: false },
@@ -71,6 +63,14 @@ const INITIAL_DATA = {
           { id: "la7", text: "Edit and upload Video 2", done: false },
           { id: "la8", text: "Reach 100 subscribers", done: false },
           { id: "la9", text: "Monetisation (1000 subs, 4000 watch hours)", done: false },
+        ]
+      },
+      {
+        title: "Completed",
+        tasks: [
+          { id: "la1", text: "Channel created (@LifeAdjustments)", done: true },
+          { id: "la2", text: "Video 1 LIVE — youtu.be/LL36ackgpVs", done: true },
+          { id: "la3", text: "Scripts for first 5 videos written", done: true },
         ]
       }
     ],
@@ -89,13 +89,6 @@ const INITIAL_DATA = {
     emoji: "🤖",
     sections: [
       {
-        title: "Completed",
-        tasks: [
-          { id: "ta1", text: "Channel created (@TechAdjustments)", done: true },
-          { id: "ta2", text: "Scripts for first 5 videos written", done: true },
-        ]
-      },
-      {
         title: "To Do — In Order",
         tasks: [
           { id: "ta3", text: "Record Video 1 — 10 Free AI Tools (screen recording)", done: false },
@@ -104,6 +97,13 @@ const INITIAL_DATA = {
           { id: "ta6", text: "Upload Short 1", done: false },
           { id: "ta7", text: "Reach 100 subscribers", done: false },
           { id: "ta8", text: "Monetisation", done: false },
+        ]
+      },
+      {
+        title: "Completed",
+        tasks: [
+          { id: "ta1", text: "Channel created (@TechAdjustments)", done: true },
+          { id: "ta2", text: "Scripts for first 5 videos written", done: true },
         ]
       }
     ],
@@ -128,13 +128,6 @@ const INITIAL_DATA = {
     emoji: "📱",
     sections: [
       {
-        title: "Completed",
-        tasks: [
-          { id: "if1", text: "Channel created (@InformedFeed)", done: true },
-          { id: "if2", text: "Scripts written", done: true },
-        ]
-      },
-      {
         title: "To Do — In Order",
         tasks: [
           { id: "if3", text: "Finalise channel name/rebrand decision", done: false },
@@ -142,6 +135,13 @@ const INITIAL_DATA = {
           { id: "if5", text: "Upload first Short — test the format", done: false },
           { id: "if6", text: "Record Shorts 2-5", done: false },
           { id: "if7", text: "Reach 100 subscribers", done: false },
+        ]
+      },
+      {
+        title: "Completed",
+        tasks: [
+          { id: "if1", text: "Channel created (@InformedFeed)", done: true },
+          { id: "if2", text: "Scripts written", done: true },
         ]
       }
     ],
@@ -207,7 +207,6 @@ function App() {
     acc + p.sections.reduce((a, s) => a + s.tasks.filter(t => t.done).length, 0), 0);
 
   return React.createElement('div', { style: { minHeight: "100vh", background: COLORS.bg } },
-    // Header
     React.createElement('div', { style: { background: "#0057FF", padding: "20px 24px 0", color: "white" } },
       React.createElement('div', { style: { maxWidth: 900, margin: "0 auto" } },
         React.createElement('div', { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 } },
@@ -245,9 +244,7 @@ function App() {
       )
     ),
 
-    // Content
     React.createElement('div', { style: { maxWidth: 900, margin: "0 auto", padding: "24px 16px" } },
-      // Sub tabs
       React.createElement('div', { style: { display: "flex", gap: 8, marginBottom: 20 } },
         React.createElement('button', {
           onClick: () => setActiveTab("tasks"),
@@ -269,7 +266,6 @@ function App() {
         }, "📝 Scripts")
       ),
 
-      // Tasks
       activeTab === "tasks" && React.createElement('div', { style: { display: "flex", flexDirection: "column", gap: 20 } },
         project.sections.map((section, sIdx) =>
           React.createElement('div', { key: sIdx },
@@ -309,7 +305,6 @@ function App() {
         )
       ),
 
-      // Scripts
       activeTab === "scripts" && hasScripts && React.createElement('div', null,
         activeScript === null
           ? React.createElement('div', { style: { display: "flex", flexDirection: "column", gap: 10 } },
