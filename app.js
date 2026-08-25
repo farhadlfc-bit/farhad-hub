@@ -1,7 +1,7 @@
 const { useState, useEffect, useRef } = React;
 
 const SUPABASE_URL = "https://hjllgaodcutlaqqievtn.supabase.co";
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGxnYW9kY3V0bGFxcWlldnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3MzMzMDgsImV4cCI6MjEwMjMwOTMwOH0.lXeghjRA-cgXWypIMstXI2i2O2UBTenbRDeP0q9Djss
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGxnYW9kY3V0bGFxcWlldnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3MzMzMDgsImV4cCI6MjEwMjMwOTMwOH0.lXeghjRA-cgXWypIMstXI2i2O2UBTenbRDeP0q9Djss";
 
 const INITIAL_DATA = {
   askmedily: {
