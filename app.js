@@ -1,4 +1,7 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
+
+const SUPABASE_URL = "https://hjllgaodcutlaqqievtn.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqbGxnYW9kY3V0bGFxcWlldnRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzcwNjcyMTYsImV4cCI6MjA1MjY0MzIxNn0.aPo2FHaOWSGHlMxnGqBKzMzNIXFBKWm3Z7YVZFBfVco";
 
 const INITIAL_DATA = {
   askmedily: {
@@ -111,13 +114,13 @@ const INITIAL_DATA = {
       {
         id: "tas1",
         title: "Video 1 — 10 Free AI Tools",
-        content: "Hook (0-10s):\n\"There are AI tools that cost thousands a year. These 10 are completely free — and most people have never heard of them.\"\n\nTool 1 — Claude.ai\nGo to claude.ai. Free tier gives you access to one of the most capable AI models available. Use it for writing, coding, research, analysis.\n\nTool 2 — Perplexity AI\nGo to perplexity.ai. This is Google but with AI answers and real sources.\n\nTool 3 — Gamma.app\nTurn any prompt into a full presentation in 30 seconds.\n\nTool 4 — ElevenLabs (free tier)\nRealistic AI voiceover. Free tier gives you 10,000 characters per month.\n\nTool 5 — Canva AI\nMagic Write, background remover, image generator — all free.\n\nTool 6 — Otter.ai\nRecords and transcribes meetings automatically. Free tier: 300 minutes/month.\n\nTool 7 — Notion AI (limited free)\nSummarise notes, generate content, extract action items.\n\nTool 8 — Remove.bg\nRemove any image background instantly.\n\nTool 9 — Runway ML (free tier)\nAI video generation. 125 credits free.\n\nTool 10 — Google NotebookLM\nUpload any document and have a full AI conversation about it. Completely free.\n\nCTA:\n\"Save this video. Pick one tool and use it today. Which one are you trying first? Drop it in the comments.\"",
+        content: "Hook (0-10s):\n\"There are AI tools that cost thousands a year. These 10 are completely free — and most people have never heard of them.\"\n\nTool 1 — Claude.ai\nGo to claude.ai. Free tier gives you access to one of the most capable AI models available.\n\nTool 2 — Perplexity AI\nGo to perplexity.ai. This is Google but with AI answers and real sources.\n\nTool 3 — Gamma.app\nTurn any prompt into a full presentation in 30 seconds.\n\nTool 4 — ElevenLabs (free tier)\nRealistic AI voiceover. Free tier gives you 10,000 characters per month.\n\nTool 5 — Canva AI\nMagic Write, background remover, image generator — all free.\n\nTool 6 — Otter.ai\nRecords and transcribes meetings automatically. Free tier: 300 minutes/month.\n\nTool 7 — Notion AI (limited free)\nSummarise notes, generate content, extract action items.\n\nTool 8 — Remove.bg\nRemove any image background instantly.\n\nTool 9 — Runway ML (free tier)\nAI video generation. 125 credits free.\n\nTool 10 — Google NotebookLM\nUpload any document and have a full AI conversation about it. Completely free.\n\nCTA:\n\"Save this video. Pick one tool and use it today. Which one are you trying first?\"",
         done: false
       },
       {
         id: "tas2",
         title: "Short 1 — One AI Prompt",
-        content: "Hook (0-3s):\n\"One AI prompt that replaces an hour of work.\"\n\nBody (3-45s):\nOpen Claude.ai. Paste this exact prompt:\n\n\"Act as a [your job title]. I need to [specific task]. The context is [brief background]. Give me [specific output format]. Make it [tone].\"\n\nThat structure — role, task, context, output, tone — works for any AI tool. Be specific and you get specific results.\n\nCTA:\n\"Follow for daily AI prompts that save you hours.\"",
+        content: "Hook (0-3s):\n\"One AI prompt that replaces an hour of work.\"\n\nBody (3-45s):\nOpen Claude.ai. Paste this exact prompt:\n\n\"Act as a [your job title]. I need to [specific task]. The context is [brief background]. Give me [specific output format]. Make it [tone].\"\n\nThat structure — role, task, context, output, tone — works for any AI tool.\n\nCTA:\n\"Follow for daily AI prompts that save you hours.\"",
         done: false
       }
     ]
@@ -167,35 +170,71 @@ const COLORS = {
   todoBg: "#F9FAFB",
 };
 
+async function loadFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/hub_data?key=eq.farhad_hub&select=value`, {
+      headers: {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+    const rows = await res.json();
+    if (rows && rows.length > 0) return JSON.parse(rows[0].value);
+  } catch {}
+  return null;
+}
+
+async function saveToSupabase(data) {
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/hub_data`, {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
+        "Prefer": "resolution=merge-duplicates"
+      },
+      body: JSON.stringify({ key: "farhad_hub", value: JSON.stringify(data) })
+    });
+  } catch {}
+}
+
 function App() {
-  const [data, setData] = useState(() => {
-    try {
-      const saved = localStorage.getItem("farhad_hub_v1");
-      return saved ? JSON.parse(saved) : INITIAL_DATA;
-    } catch { return INITIAL_DATA; }
-  });
+  const [data, setData] = useState(INITIAL_DATA);
   const [activeProject, setActiveProject] = useState("askmedily");
   const [activeTab, setActiveTab] = useState("tasks");
   const [activeScript, setActiveScript] = useState(null);
+  const [syncing, setSyncing] = useState(false);
+  const saveTimer = useRef(null);
 
   useEffect(() => {
-    try {
-      localStorage.setItem("farhad_hub_v1", JSON.stringify(data));
-    } catch {}
-  }, [data]);
+    const load = async () => {
+      setSyncing(true);
+      const saved = await loadFromSupabase();
+      if (saved) setData(saved);
+      setSyncing(false);
+    };
+    load();
+  }, []);
+
+  const saveData = (newData) => {
+    setData(newData);
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => saveToSupabase(newData), 1000);
+  };
 
   const toggleTask = (projectKey, sectionIdx, taskId) => {
     const newData = JSON.parse(JSON.stringify(data));
     const task = newData[projectKey].sections[sectionIdx].tasks.find(t => t.id === taskId);
     if (task) task.done = !task.done;
-    setData(newData);
+    saveData(newData);
   };
 
   const toggleScript = (projectKey, scriptId) => {
     const newData = JSON.parse(JSON.stringify(data));
     const script = newData[projectKey].scripts?.find(s => s.id === scriptId);
     if (script) script.done = !script.done;
-    setData(newData);
+    saveData(newData);
   };
 
   const project = data[activeProject];
@@ -214,7 +253,7 @@ function App() {
             React.createElement('span', { style: { fontSize: 24 } }, "⚡"),
             React.createElement('div', null,
               React.createElement('h1', { style: { fontSize: 20, fontWeight: 800, margin: 0 } }, "Farhad's Command Centre"),
-              React.createElement('p', { style: { fontSize: 12, opacity: 0.8, margin: 0 } }, "All projects. All tasks. One place.")
+              React.createElement('p', { style: { fontSize: 12, opacity: 0.8, margin: 0 } }, syncing ? "Syncing..." : "Synced across all devices ✓")
             )
           ),
           React.createElement('div', { style: { textAlign: "right" } },
